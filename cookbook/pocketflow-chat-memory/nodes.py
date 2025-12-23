@@ -27,6 +27,8 @@ class GetUserQuestionNode(Node):
         # If exec_res is None, the user wants to exit
         if exec_res is None:
             print("\nGoodbye!")
+            # Очищаем successors, чтобы Flow корректно завершился без предупреждения
+            self.successors.clear()
             return None  # End the conversation
             
         # Add user message to current messages
