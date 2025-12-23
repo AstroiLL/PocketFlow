@@ -32,6 +32,8 @@ class ChatNode(Node):
     def post(self, shared, prep_res, exec_res):
         if prep_res is None or exec_res is None:
             print("\nGoodbye!")
+            # Очистим переходы, чтобы Flow завершился без предупреждения
+            self.successors = {}
             return None  # End the conversation
         
         # Print the assistant's response
