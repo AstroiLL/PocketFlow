@@ -113,6 +113,8 @@ class ExecuteSQL(Node):
                      for row in result_or_error: print(" | ".join(map(str, row)))
             else: print(result_or_error)
             print("\n=================================\n")
+            # Очищаем successors, чтобы Flow корректно завершился без предупреждения
+            self.successors.clear()
             return
         else:
             # Execution failed (SQLite error caught in exec)
@@ -127,6 +129,8 @@ class ExecuteSQL(Node):
             if shared["debug_attempts"] >= max_attempts:
                 print(f"Max debug attempts ({max_attempts}) reached. Stopping.")
                 shared["final_error"] = f"Failed to execute SQL after {max_attempts} attempts. Last error: {shared['execution_error']}"
+                # Очищаем successors, чтобы Flow корректно завершился без предупреждения
+                self.successors.clear()
                 return
             else:
                 print("Attempting to debug the SQL...")
