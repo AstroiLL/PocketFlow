@@ -21,6 +21,8 @@ class UserInputNode(Node):
         # Check if user wants to exit
         if user_input and user_input.lower() == 'exit':
             print("\nGoodbye! Safe travels!")
+            # Очищаем successors, чтобы Flow корректно завершился без предупреждения
+            self.successors.clear()
             return None  # End the conversation
         
         # Store user input in shared
